@@ -102,6 +102,7 @@ Ansible-Roboshop/
 
 ## 📸 Application UI Preview
 
+![Roboshop UI](https://raw.githubusercontent.com/BharathKumarReddy2103/Ansible-Roboshop/main/robot%20shop.png)
 ---
 
 ## 🧠 Learning Objectives
