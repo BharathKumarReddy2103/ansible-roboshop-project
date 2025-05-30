@@ -1,3 +1,5 @@
+![Roboshop UI](https://raw.githubusercontent.com/BharathKumarReddy2103/Ansible-Roboshop/main/robot%20shop.png)
+
 # 🛍️ Roboshop Ansible Automation
 
 This repository contains Ansible playbooks to automate the deployment and configuration of **Stan's Robot Shop**, a microservices-based e-commerce application.
@@ -100,9 +102,7 @@ Ansible-Roboshop/
 
 ---
 
-## 📸 Application UI Preview
-
-![Roboshop UI](https://raw.githubusercontent.com/BharathKumarReddy2103/Ansible-Roboshop/main/robot%20shop.png)
+## 📸 Application UI Previe
 ---
 
 ## 🧠 Learning Objectives
