@@ -42,10 +42,10 @@
     community.general.npm:
       path: /app
 
-  # - name: copy cart service to system directory
-  #   ansible.builtin.copy:
-  #     src: cart.service
-  #     dest: /etc/systemd/system/cart.service
+  - name: copy cart service to system directory
+    ansible.builtin.copy:
+      src: cart.service
+      dest: /etc/systemd/system/cart.service
 
   # - name: systemctl deamon reload
   #   ansible.builtin.systemd_service:
