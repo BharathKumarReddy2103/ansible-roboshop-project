@@ -24,10 +24,10 @@
       path: /usr/share/nginx/html
       state: absent
 
-  # - name: create html directory
-  #   ansible.builtin.file:
-  #     path: /usr/share/nginx/html
-  #     state: directory
+  - name: create html directory
+    ansible.builtin.file:
+      path: /usr/share/nginx/html
+      state: directory
 
   # - name: download frontend code
   #   ansible.builtin.get_url:
