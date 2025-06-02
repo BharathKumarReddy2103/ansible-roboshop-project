@@ -38,9 +38,9 @@
       dest: /app
       remote_src: yes
 
-  # - name: install dependencies
-  #   community.general.npm:
-  #     path: /app
+  - name: install dependencies
+    community.general.npm:
+      path: /app
 
   # - name: copy cart service to system directory
   #   ansible.builtin.copy:
