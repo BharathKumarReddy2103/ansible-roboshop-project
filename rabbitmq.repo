@@ -1,0 +1,23 @@
+[rabbitmq-erlang]
+name=RabbitMQ Erlang Repository
+baseurl=https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/rpm/el/8/$basearch
+gpgcheck=0
+enabled=1
+
+[rabbitmq-erlang-noarch]
+name=RabbitMQ Erlang Repository - noarch
+baseurl=https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/rpm/el/8/noarch
+gpgcheck=0
+enabled=1
+
+[rabbitmq-server]
+name=RabbitMQ Server Repository
+baseurl=https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/rpm/el/8/$basearch
+gpgcheck=0
+enabled=1
+
+[rabbitmq-server-noarch]
+name=RabbitMQ Server Repository - noarch
+baseurl=https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-server/rpm/el/8/noarch
+gpgcheck=0
+enabled=1
