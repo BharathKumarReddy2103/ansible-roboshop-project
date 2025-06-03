@@ -35,11 +35,11 @@
       url: https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip 
       dest: /tmp/shipping.zip
 
-  # - name: extract shipping code
-  #   ansible.builtin.unarchive:
-  #     src: /tmp/shipping.zip
-  #     dest: /app
-  #     remote_src: yes
+  - name: extract shipping code
+    ansible.builtin.unarchive:
+      src: /tmp/shipping.zip
+      dest: /app
+      remote_src: yes
 
   # - name: install maven dependencies
   #   ansible.builtin.command: mvn clean package
