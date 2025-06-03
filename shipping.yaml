@@ -6,9 +6,9 @@
     ansible.builtin.dnf:
       name: "{{ item }}"
       state: installed
-    # loop:
-    # - maven
-    # - mysql
+    loop:
+    - maven
+    - mysql
     
   - name: install PyMySQL and cryptography 
     ansible.builtin.pip:
