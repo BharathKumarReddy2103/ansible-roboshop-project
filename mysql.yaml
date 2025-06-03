@@ -7,11 +7,11 @@
       name: mysql-server
       state: installed
 
-  # - name: start mysql server
-  #   ansible.builtin.service:
-  #     name: mysqld
-  #     state: started
-  #     enabled: yes
+  - name: start mysql server
+    ansible.builtin.service:
+      name: mysqld
+      state: started
+      enabled: yes
 
 
   # - name: setp root password
