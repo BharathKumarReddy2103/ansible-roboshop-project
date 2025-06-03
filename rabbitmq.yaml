@@ -12,11 +12,11 @@
       name: rabbitmq-server
       state: installed
   
-  # - name: enable and start rabbitmq
-  #   ansible.builtin.service:
-  #     name: rabbitmq-server
-  #     state: started
-  #     enabled: yes
+  - name: enable and start rabbitmq
+    ansible.builtin.service:
+      name: rabbitmq-server
+      state: started
+      enabled: yes
 
   # - name: create rabbitmq user
   #   community.rabbitmq.rabbitmq_user:
