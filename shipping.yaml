@@ -30,10 +30,10 @@
       system: true
       home: /app
 
-  # - name: download shipping code
-  #   ansible.builtin.get_url:
-  #     url: https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip 
-  #     dest: /tmp/shipping.zip
+  - name: download shipping code
+    ansible.builtin.get_url:
+      url: https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip 
+      dest: /tmp/shipping.zip
 
   # - name: extract shipping code
   #   ansible.builtin.unarchive:
