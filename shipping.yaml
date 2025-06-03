@@ -41,10 +41,10 @@
       dest: /app
       remote_src: yes
 
-  # - name: install maven dependencies
-  #   ansible.builtin.command: mvn clean package
-  #   args:
-  #     chdir: /app
+  - name: install maven dependencies
+    ansible.builtin.command: mvn clean package
+    args:
+      chdir: /app
 
   # - name: rename jar file
   #   ansible.builtin.command: mv target/shipping-1.0.jar shipping.jar
