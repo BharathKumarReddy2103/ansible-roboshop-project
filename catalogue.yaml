@@ -57,19 +57,19 @@
       state: started
       enabled: yes
 
-  # - name: copy mongodb repo
-  #   ansible.builtin.copy:
-  #     src: mongo.repo
-  #     dest: /etc/yum.repos.d/mongo.repo
+  - name: copy mongodb repo
+    ansible.builtin.copy:
+      src: mongo.repo
+      dest: /etc/yum.repos.d/mongo.repo
 
-  # - name: install mongodb client
-  #   ansible.builtin.dnf:
-  #     name: mongodb-mongosh
-  #     state: present
+  - name: install mongodb client
+    ansible.builtin.dnf:
+      name: mongodb-mongosh
+      state: present
 
-  # - name: check products loaded or not
-  #   ansible.builtin.command: mongosh --host mongodb.bharath2103.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
-  #   register: catalogue_output
+  - name: check products loaded or not
+    ansible.builtin.command: mongosh --host mongodb.bharath2103.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+    register: catalogue_output
 
   # - name: print catalogue output
   #   ansible.builtin.debug:
