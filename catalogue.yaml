@@ -18,12 +18,12 @@
   #     path: /app
   #     state: directory
 
-  # - name: create roboshop system user
-  #   ansible.builtin.user:
-  #     name: roboshop
-  #     shell: /sbin/nologin
-  #     system: true
-  #     home: /app
+  - name: create roboshop system user
+    ansible.builtin.user:
+      name: roboshop
+      shell: /sbin/nologin
+      system: true
+      home: /app
 
   # - name: download catalogue code
   #   ansible.builtin.get_url:
