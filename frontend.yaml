@@ -45,12 +45,12 @@
       path: /etc/nginx/nginx.conf
       state: absent
 
-  # - name: copy roboshop nginx conf
-  #   ansible.builtin.copy:
-  #     src: nginx.conf
-  #     dest: /etc/nginx/nginx.conf
+  - name: copy roboshop nginx conf
+    ansible.builtin.copy:
+      src: nginx.conf
+      dest: /etc/nginx/nginx.conf
 
-  # - name: restart nginx
-  #   ansible.builtin.service:
-  #     name: nginx
-  #     state: restarted
+  - name: restart nginx
+    ansible.builtin.service:
+      name: nginx
+      state: restarted
