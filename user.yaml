@@ -38,22 +38,22 @@
       dest: /app
       remote_src: yes
 
-  - name: install dependencies
-    community.general.npm:
-      path: /app
+  # - name: install dependencies
+  #   community.general.npm:
+  #     path: /app
 
-  - name: copy user service to system directory
-    ansible.builtin.copy:
-      src: user.service
-      dest: /etc/systemd/system/user.service
+  # - name: copy user service to system directory
+  #   ansible.builtin.copy:
+  #     src: user.service
+  #     dest: /etc/systemd/system/user.service
 
-  - name: systemctl deamon reload
-    ansible.builtin.systemd_service:
-      daemon_reload: true
+  # - name: systemctl deamon reload
+  #   ansible.builtin.systemd_service:
+  #     daemon_reload: true
 
-  - name: start and enable user
-    ansible.builtin.service:
-      name: user
-      state: started
-      enabled: yes
+  # - name: start and enable user
+  #   ansible.builtin.service:
+  #     name: user
+  #     state: started
+  #     enabled: yes
   
