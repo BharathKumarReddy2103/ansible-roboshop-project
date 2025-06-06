@@ -71,9 +71,9 @@
     ansible.builtin.command: mongosh --host mongodb.bharath2103.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
     register: catalogue_output
 
-  # - name: print catalogue output
-  #   ansible.builtin.debug:
-  #     msg: "{{ catalogue_output }}"
+  - name: print catalogue output
+    ansible.builtin.debug:
+      msg: "{{ catalogue_output }}"
 
   # - name: load products
   #   ansible.builtin.shell: mongosh --host mongodb.bharath2103.site < /app/db/master-data.js
