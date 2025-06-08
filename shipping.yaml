@@ -46,25 +46,25 @@
     args:
       chdir: /app
 
-  - name: rename jar file
-    ansible.builtin.command: mv target/shipping-1.0.jar shipping.jar
-    args:
-      chdir: /app
+  # - name: rename jar file
+  #   ansible.builtin.command: mv target/shipping-1.0.jar shipping.jar
+  #   args:
+  #     chdir: /app
 
-  - name: copy shipping service
-    ansible.builtin.copy:
-      src: shipping.service
-      dest: /etc/systemd/system/shipping.service
+  # - name: copy shipping service
+  #   ansible.builtin.copy:
+  #     src: shipping.service
+  #     dest: /etc/systemd/system/shipping.service
 
-  - name: daemon reload
-    ansible.builtin.systemd_service:
-      daemon_reload: true
+  # - name: daemon reload
+  #   ansible.builtin.systemd_service:
+  #     daemon_reload: true
 
-  - name: enable and start shipping
-    ansible.builtin.service:
-      name: shipping
-      state: started
-      enabled: yes
+  # - name: enable and start shipping
+  #   ansible.builtin.service:
+  #     name: shipping
+  #     state: started
+  #     enabled: yes
 
   # - name: connect to mysql using app user
   #   community.mysql.mysql_info:
