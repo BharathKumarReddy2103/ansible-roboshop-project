@@ -3,7 +3,19 @@
   become: yes
 
   tasks:
-    - name: copy rabbitmq repo
+    - name: install required base packages for HTTPS repos
+      ansible.builtin.dnf:
+        name:
+          - ca-certificates
+          - curl
+          - wget
+        state: present
+
+    - name: update CA trust
+      ansible.builtin.command: update-ca-trust
+      changed_when: false
+
+    - name: copy rabbitmq repo (EL9)
       ansible.builtin.copy:
         src: rabbitmq.repo
         dest: /etc/yum.repos.d/rabbitmq.repo
@@ -13,7 +25,7 @@
       ansible.builtin.dnf:
         update_cache: yes
 
-    - name: install erlang (required for rabbitmq)
+    - name: install erlang
       ansible.builtin.dnf:
         name: erlang
         state: present
@@ -29,7 +41,7 @@
         state: started
         enabled: yes
 
-    - name: wait for rabbitmq to be up
+    - name: wait for rabbitmq to be ready
       ansible.builtin.wait_for:
         port: 5672
         delay: 5
