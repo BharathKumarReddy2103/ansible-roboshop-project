@@ -3,13 +3,20 @@
   become: yes
 
   tasks:
-    - name: install required base packages for HTTPS repos
+    - name: disable rabbitmq repos if present (prevent dnf failure)
+      ansible.builtin.command: dnf config-manager --set-disabled rabbitmq-erlang rabbitmq-server
+      ignore_errors: yes
+      changed_when: false
+
+    - name: install required base packages (system repos only)
       ansible.builtin.dnf:
         name:
           - ca-certificates
           - curl
           - wget
+          - dnf-plugins-core
         state: present
+        disablerepo: rabbitmq*
 
     - name: update CA trust
       ansible.builtin.command: update-ca-trust
@@ -21,7 +28,11 @@
         dest: /etc/yum.repos.d/rabbitmq.repo
         mode: '0644'
 
-    - name: refresh dnf cache after adding repo
+    - name: enable rabbitmq repos
+      ansible.builtin.command: dnf config-manager --set-enabled rabbitmq-erlang rabbitmq-server
+      changed_when: false
+
+    - name: refresh dnf cache after enabling rabbitmq repo
       ansible.builtin.dnf:
         update_cache: yes
 
