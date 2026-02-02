@@ -1,70 +1,30 @@
 - name: setup rabbitmq component
-  hosts: rabbitmq
   become: yes
-
+  hosts: rabbitmq
   tasks:
-    - name: disable rabbitmq repos if present (prevent dnf failure)
-      ansible.builtin.command: dnf config-manager --set-disabled rabbitmq-erlang rabbitmq-server
-      ignore_errors: yes
-      changed_when: false
+  - name: copy rabbitmq repo
+    ansible.builtin.copy:
+      src: rabbitmq.repo
+      dest: /etc/yum.repos.d/rabbitmq.repo
 
-    - name: install required base packages (system repos only)
-      ansible.builtin.dnf:
-        name:
-          - ca-certificates
-          - curl
-          - wget
-          - dnf-plugins-core
-        state: present
-        disablerepo: rabbitmq*
+  - name: install rabbitmq-server
+    ansible.builtin.dnf:
+      name: rabbitmq-server
+      state: installed
+  
+  - name: enable and start rabbitmq
+    ansible.builtin.service:
+      name: rabbitmq-server
+      state: started
+      enabled: yes
 
-    - name: update CA trust
-      ansible.builtin.command: update-ca-trust
-      changed_when: false
-
-    - name: copy rabbitmq repo (EL9)
-      ansible.builtin.copy:
-        src: rabbitmq.repo
-        dest: /etc/yum.repos.d/rabbitmq.repo
-        mode: '0644'
-
-    - name: enable rabbitmq repos
-      ansible.builtin.command: dnf config-manager --set-enabled rabbitmq-erlang rabbitmq-server
-      changed_when: false
-
-    - name: refresh dnf cache after enabling rabbitmq repo
-      ansible.builtin.dnf:
-        update_cache: yes
-
-    - name: install erlang
-      ansible.builtin.dnf:
-        name: erlang
-        state: present
-
-    - name: install rabbitmq-server
-      ansible.builtin.dnf:
-        name: rabbitmq-server
-        state: present
-
-    - name: enable and start rabbitmq
-      ansible.builtin.service:
-        name: rabbitmq-server
-        state: started
-        enabled: yes
-
-    - name: wait for rabbitmq to be ready
-      ansible.builtin.wait_for:
-        port: 5672
-        delay: 5
-        timeout: 60
-
-    - name: create rabbitmq user
-      community.rabbitmq.rabbitmq_user:
-        user: roboshop
-        password: roboshop123
-        permissions:
-          - vhost: /
-            configure_priv: .*
-            read_priv: .*
-            write_priv: .*
-        state: present
+  - name: create rabbitmq user
+    community.rabbitmq.rabbitmq_user:
+      user: roboshop
+      password: roboshop123
+      permissions:
+        - vhost: /
+          configure_priv: .*
+          read_priv: .*
+          write_priv: .*
+      state: present
