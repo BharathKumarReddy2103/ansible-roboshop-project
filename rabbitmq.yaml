@@ -1,31 +1,47 @@
 - name: setup rabbitmq component
-  become: yes
   hosts: rabbitmq
+  become: yes
+
   tasks:
-  - name: copy rabbitmq repo
-    ansible.builtin.copy:
-      src: rabbitmq.repo
-      dest: /etc/yum.repos.d/rabbitmq.repo
+    - name: copy rabbitmq repo
+      ansible.builtin.copy:
+        src: rabbitmq.repo
+        dest: /etc/yum.repos.d/rabbitmq.repo
+        mode: '0644'
 
-  - name: install rabbitmq-server
-    ansible.builtin.dnf:
-      name: rabbitmq-server
-      state: installed
-  
-  - name: enable and start rabbitmq
-    ansible.builtin.service:
-      name: rabbitmq-server
-      state: started
-      enabled: yes
+    - name: refresh dnf cache after adding repo
+      ansible.builtin.dnf:
+        update_cache: yes
 
-  - name: create rabbitmq user
-    community.rabbitmq.rabbitmq_user:
-      user: roboshop
-      password: roboshop123
-      permissions:
-        - vhost: /
-          configure_priv: .*
-          read_priv: .*
-          write_priv: .*
-      state: present
-      
+    - name: install erlang (required for rabbitmq)
+      ansible.builtin.dnf:
+        name: erlang
+        state: present
+
+    - name: install rabbitmq-server
+      ansible.builtin.dnf:
+        name: rabbitmq-server
+        state: present
+
+    - name: enable and start rabbitmq
+      ansible.builtin.service:
+        name: rabbitmq-server
+        state: started
+        enabled: yes
+
+    - name: wait for rabbitmq to be up
+      ansible.builtin.wait_for:
+        port: 5672
+        delay: 5
+        timeout: 60
+
+    - name: create rabbitmq user
+      community.rabbitmq.rabbitmq_user:
+        user: roboshop
+        password: roboshop123
+        permissions:
+          - vhost: /
+            configure_priv: .*
+            read_priv: .*
+            write_priv: .*
+        state: present
